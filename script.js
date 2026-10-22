@@ -827,7 +827,12 @@ function startExperience(x, y) {
   createShockwave(x, y);
 }
 
+
 function pointer(e) {
+  if (e.cancelable) {
+    e.preventDefault();
+  }
+
   const rect = canvas.getBoundingClientRect();
 
   const x =
@@ -840,6 +845,8 @@ function pointer(e) {
 
   startExperience(x, y);
 }
+
+
 
 canvas.addEventListener("pointerdown", pointer);
 
