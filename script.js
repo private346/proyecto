@@ -790,6 +790,7 @@ function startExperience(x, y) {
   if (!started) {
     started = true;
     musica.volume = 0.4;
+    musica.currentTime = 0;
     musica.play().catch(error => {
       console.log("No se pudo reproducir la música:", error);
     });
