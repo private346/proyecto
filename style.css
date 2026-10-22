@@ -1,0 +1,245 @@
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #020207;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+body {
+  touch-action: manipulation;
+}
+
+canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.vignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at center,
+      transparent 35%,
+      rgba(0, 0, 0, 0.2) 62%,
+      rgba(0, 0, 0, 0.72) 100%
+    );
+  z-index: 2;
+}
+
+.intro {
+  position: fixed;
+  z-index: 4;
+  left: 50%;
+  top: 50%;
+  width: min(700px, 90vw);
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  pointer-events: none;
+  transition:
+    opacity 1.3s ease,
+    transform 1.5s ease;
+}
+
+.eyebrow {
+    transform: translateY(-100px);
+}
+
+.intro h1 {
+    transform: translateY(-100px);
+}
+
+
+.intro p {
+    transform: translateY(50px);
+}
+
+.pulse {
+    position: relative;
+    top: 50px;
+}
+
+
+
+.intro.hidden {
+  opacity: 0;
+  transform: translate(-50%, -52%) scale(1.08);
+}
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 6px;
+  color: rgba(255, 218, 110, 0.85);
+  margin-bottom: 14px;
+}
+
+.intro h1 {
+  margin: 0;
+  font-size: clamp(42px, 9vw, 82px);
+  font-weight: 400;
+  color: #fff6d2;
+  text-shadow:
+    0 0 15px rgba(255, 204, 80, 0.7),
+    0 0 40px rgba(255, 166, 0, 0.4);
+}
+
+.intro p {
+  margin-top: 18px;
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.pulse {
+  margin: 25px auto 0;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 33px;
+  color: #ffd35a;
+  border: 1px solid rgba(255, 210, 90, 0.5);
+  box-shadow:
+    0 0 18px rgba(255, 210, 90, 0.35),
+    inset 0 0 20px rgba(255, 210, 90, 0.08);
+  animation: pulse 1.8s ease-in-out infinite;
+}
+
+.letter {
+  position: fixed;
+  z-index: 5;
+  left: 50%;
+  bottom: 7%;
+  width: min(580px, 88vw);
+  padding: 25px 24px 24px;
+  transform: translate(-50%, 40px);
+  text-align: center;
+
+  background: rgba(5, 5, 18, 0.42);
+  border: 1px solid rgba(255, 216, 113, 0.24);
+  border-radius: 24px;
+
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  box-shadow:
+    0 0 45px rgba(255, 181, 37, 0.08),
+    inset 0 0 30px rgba(255, 255, 255, 0.02);
+
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 1.2s ease,
+    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+
+  color: #fff;
+}
+
+.letter.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.letter .tag {
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: #ffd86a;
+  margin-bottom: 8px;
+}
+
+.letter h2 {
+  margin: 0 0 12px;
+  font-size: clamp(28px, 6vw, 42px);
+  font-weight: 400;
+  color: #ffe4a0;
+  text-shadow: 0 0 18px rgba(255, 191, 43, 0.5);
+}
+
+.letter p {
+  margin: 9px 0;
+  line-height: 1.65;
+  font-size: clamp(14px, 2.8vw, 17px);
+  color: rgba(255, 255, 255, 0.84);
+}
+
+.letter strong {
+  display: block;
+  margin-top: 16px;
+  font-size: 18px;
+  color: #ffd56a;
+  text-shadow: 0 0 15px rgba(255, 181, 0, 0.65);
+}
+
+.hint {
+  position: fixed;
+  z-index: 4;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  width: 100%;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.38);
+  font-size: 11px;
+  letter-spacing: 1px;
+  pointer-events: none;
+  transition: opacity 0.8s;
+}
+
+.hint.hide {
+  opacity: 0;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow:
+      0 0 18px rgba(255, 210, 90, 0.35),
+      0 0 0 rgba(255, 210, 90, 0);
+  }
+
+  50% {
+    transform: scale(1.12);
+    box-shadow:
+      0 0 35px rgba(255, 210, 90, 0.55),
+      0 0 50px rgba(255, 150, 0, 0.16);
+  }
+}
+
+@media (max-width: 600px) {
+  .eyebrow {
+    letter-spacing: 4px;
+    font-size: 9px;
+  }
+
+  .letter {
+    bottom: 5%;
+    padding: 20px 17px;
+  }
+
+  .hint {
+    bottom: 10px;
+  }
+}
+
+
+.gif-romantico {
+  display: block;
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+  margin: 0 auto 15px;
+}
