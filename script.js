@@ -853,7 +853,20 @@ function pointer(e) {
 
 
 
-canvas.addEventListener("pointerdown", pointer);
+const botonCorazon = document.getElementById("botonCorazon");
+
+botonCorazon.addEventListener("click", () => {
+    if (!started) {
+        musica.muted = false;
+        musica.volume = 1;
+
+        musica.play().catch(error => {
+            console.log("Error de audio:", error);
+        });
+
+        startExperience(W / 2, H / 2);
+    }
+});
 
 resize();
 animate();
